@@ -226,8 +226,6 @@
          {
            const res=await axios.get('clientes/list'); 
             this.clientes=res.data;
-
-            console.log(res.data);
          }, 
 
         //  GUARDAR COTIZACION

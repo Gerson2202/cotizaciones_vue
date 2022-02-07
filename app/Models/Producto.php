@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     use HasFactory;
+    protected $fillable=['img'];
 
      // relations uno a muchos  con categoria
      public function categoria(){

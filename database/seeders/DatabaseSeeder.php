@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([UsersTableSeeder::class]);
-        Cliente::factory(20)->create();
-        Categoria::factory(10)->create();
-        Producto::factory(10)->create();
-        Proveedor::factory(10)->create();
-        Cotizacion::factory(10)->create();
+        // Cliente::factory(20)->create();
+        // Categoria::factory(10)->create();
+        // Producto::factory(10)->create();
+        // Proveedor::factory(10)->create();
+        // Cotizacion::factory(10)->create();
 
 
     }

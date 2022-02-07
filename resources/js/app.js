@@ -16,6 +16,8 @@ Vue.component('clientes', require('./components/Clientes.vue').default);
 Vue.component('productos', require('./components/Productos.vue').default);
 Vue.component('categorias', require('./components/Categorias.vue').default);
 Vue.component('proveedores', require('./components/Proveedores.vue').default);
+Vue.component('producto_precios', require('./components/ProductoPrecios.vue').default);
+
 Vue.component('select2', require('./components/Select2.vue').default);
 
 

@@ -2,6 +2,65 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
+
+             <!-- Modal PARA CREAR CATEGORIA -->
+          <div   class="modal fade" id="modalAggCategoria" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" >
+                <div class="modal-header">
+                  <h5 class="modal-title"  id="exampleModalLabel">Agregar Categoria</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <form action="">
+                           <div class="my-4">
+                                <label for="nombre">Nombre</label>
+                                <!-- enlazar un input con una data  -->
+                                <input v-model="categoria.nombre"  type="text" class="form-control" id="nombre" name="nombre" placeholder="escribir Nombre">
+                           </div>
+
+                       </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button @click="guardarCategoria()" type="submit" data-dismiss="modal" class="btn btn-primary">Agregar Categoria</button>
+                </div>
+              </div>
+            </div>
+          </div>
+             <!-- Modal PARA EDITAR CATEGORIA -->
+          <div   class="modal fade" id="modalEditCategoria" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" >
+                <div class="modal-header">
+                  <h5 class="modal-title"  id="exampleModalLabel">Editar Categoria</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <form action="">
+                           <div class="my-4">
+                                <label for="nombre">Nombre</label>
+                                <!-- enlazar un input con una data  -->
+                                <input v-model="Editcategoria.nombre"  type="text" class="form-control" id="nombre" name="nombre" placeholder="escribir Nombre">
+                           </div>
+
+                       </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button @click="modificarCategoria()" type="submit" data-dismiss="modal" class="btn btn-primary">Agregar Categoria</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- TABLA -->
            <div class="table-responsive">
               <table class="table">
                 <thead class="text-primary">
@@ -11,7 +70,9 @@
                   <th>
                     Nombre
                   </th>
-                 
+                  <th row="2">
+                   <button type="button"   class="btn btn-success btn-round btn-sm" data-toggle="modal" data-target="#modalAggCategoria"><i class="material-icons">add_box</i>  Agregar</button>
+                  </th>                 
                   
                  
                 </thead>
@@ -19,7 +80,7 @@
                    <tr v-for="cat in categorias" :key="cat.id">
                         <th scope="row">{{cat.id}}</th>
                         <td>{{cat.nombre}}</td>
-                        <td><button @click="modificar=true; abrirModal(cat)" class="btn btn-info btn-sm">Editar</button>
+                        <td><button @click="consultarCategoria(cat)" data-toggle="modal" data-target="#modalEditCategoria" class="btn btn-info btn-sm">Editar</button>
                         <button @click="eliminar(cat.id)" class="btn btn-danger btn-sm">Eliminar</button></td>
                     </tr>                    
                  
@@ -39,8 +100,17 @@
        data(){
         return{
            
-            categorias:[],
-           
+           idCategoria:0,
+        //    tabla
+           categorias:[],
+        //    Agregar
+           categoria:{
+               nombre:'',
+           },
+        //    Editar
+           Editcategoria:{
+               nombre:'',
+           }
            
 
         }
@@ -59,6 +129,39 @@
              const res=await axios.delete('categorias/'+id);
              this.listar();
          },  
+
+          //  GUARDAR PRODUCTO
+         async guardarCategoria(){
+            const res=await axios.post('categoria/store',this.categoria)
+            // RESPUESTA POSITIVA
+            .then(response => {
+                  this.categoria.nombre="",
+                  this.listar();
+              })
+               // RESPUESTA NEGATIVA
+              .catch(err => {
+                alert('favor completar los campos')
+              })
+         },
+         async consultarCategoria(data)
+         {
+            this.Editcategoria.nombre=data.nombre,
+            this.idCategoria=data.id
+         },
+         async modificarCategoria()
+         {
+             const res=await axios.put('categoria/'+this.idCategoria,this.Editcategoria)
+
+               .then(response => {
+                 console.log(res);
+                  this.listar();
+              })
+               // RESPUESTA NEGATIVA
+              .catch(err => {
+                alert('favor completar los campos')
+              })
+
+         }
         
         
        

@@ -2,6 +2,89 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
+
+           <!-- Modal PARA CREAR PRODUCTO -->
+          <div   class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" >
+                <div class="modal-header">
+                  <h5 class="modal-title"  id="exampleModalLabel">Agregar Producto</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <form action="">
+                           <div class="my-4">
+                                <label for="nombre">Nombre</label>
+                                <!-- enlazar un input con una data  -->
+                                <input v-model="producto.nombre"  type="text" class="form-control" id="nombre" name="nombre" placeholder="escribir Nombre">
+                           </div>
+                            <div class="my-4">
+                                <label for="cliente">Categoria</label>
+                                  <select v-model="producto.categoria_id" :options="categorias" name="categoria_id" class="form-control">
+                                   <option disabled value="0">Seleccionar uno...</option>
+                                    <option v-for="cate in categorias" :value="cate.id"> {{cate.nombre}}</option>                                  
+                                   
+                                </select>
+                           </div> 
+                          
+                            <div class="my-4">
+                                <label for="descripcion">Descripcion</label>
+                                <textarea v-model="producto.descripcion" type="text" class="form-control" id="descripcion" name="descripcion" placeholder="escribir descripcion"></textarea>
+                           </div>                          
+
+                       </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button @click="guardarProducto()" type="submit" data-dismiss="modal" class="btn btn-primary">Agregar Cotizacion</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <!-- Modal PARA MODIFICAR PRODUCTO -->
+          <div   class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" >
+                <div class="modal-header">
+                  <h5 class="modal-title"  id="exampleModalLabel">Editar Producto</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <form action="">
+                           <div class="my-4">
+                                <label for="nombre">Nombre</label>
+                                <!-- enlazar un input con una data  -->
+                                <input v-model="productoEdit.nombre"  type="text" class="form-control" id="nombre" name="nombre" placeholder="escribir Nombre">
+                           </div>
+                            <div class="my-4">
+                                <label for="cliente">Categoria</label>
+                                  <select v-model="productoEdit.categoria_id" :options="categorias" name="categoria_id" class="form-control">
+                                   <option disabled value="0">Seleccionar uno...</option>
+                                    <option v-for="cate in categorias" :value="cate.id"> {{cate.nombre}}</option>                                  
+                                   
+                                </select>
+                           </div> 
+                          
+                            <div class="my-4">
+                                <label for="descripcion">Descripcion</label>
+                                <textarea v-model="productoEdit.descripcion" type="text" class="form-control" id="descripcion" name="descripcion" placeholder="escribir descripcion"></textarea>
+                           </div>                          
+
+                       </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button @click="modificarProducto()" type="submit" data-dismiss="modal" class="btn btn-primary">Agregar Cotizacion</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
            <div class="table-responsive">
               <table class="table">
                 <thead class="text-primary">
@@ -15,7 +98,8 @@
                     Descripcion
                   </th>
                   <th row="2">
-                    Opciones
+                   <button type="button"   class="btn btn-success btn-round btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="material-icons">add_box</i>  Agregar</button>
+
                   </th>
                   
                  
@@ -25,8 +109,9 @@
                         <th scope="row">{{prod.id}}</th>
                         <td>{{prod.nombre}}</td>
                         <td>{{prod.descripcion}}</td>
-                        <td><button @click="modificar=true; abrirModal(prod)" class="btn btn-info btn-sm">Editar</button>
-                        <button @click="eliminar(prod.id)" class="btn btn-danger btn-sm">Eliminar</button></td>
+                        <td><button data-toggle="modal" data-target="#exampleModal2" @click="AbrirModalEdit(prod)" class="btn btn-info btn-sm">Editar</button>
+                        <button @click="eliminar(prod.id)" class="btn btn-danger btn-sm">Eliminar</button><span></span>
+                        <a class="btn btn-sm btn-info" :href="`/producto/show/${prod.id}`">Ver detalles</a></td>
                     </tr>                    
                  
                 </tbody>
@@ -46,6 +131,20 @@
         return{
            
             productos:[],
+            categorias:[],
+            idProducto:0,
+
+
+            producto:{
+              nombre:'',
+              categoria_id:'',
+              descripcion:''
+            },
+            productoEdit:{
+              nombre:'',
+              categoria_id:'',
+              descripcion:''
+            },
            
            
 
@@ -64,8 +163,54 @@
          {
            const res=await axios.delete('productos/'+id);
            this.listar();
-         }
-        
+         },
+
+         //  CONSULTANDO CATEGORIAS PARA EL SELECT
+          async categoriasListar()  
+         {
+           const res=await axios.get('categorias/list'); 
+            this.categorias=res.data;
+         }, 
+
+        //  GUARDAR PRODUCTO 
+         async guardarProducto(){
+            const res=await axios.post('producto/store',this.producto)
+            // RESPUESTA POSITIVA
+            .then(response => {
+                  this.producto.nombre="",
+                  this.producto.categoria_id="",
+                  this.producto.descripcion="",
+                  this.listar();
+              })
+               // RESPUESTA NEGATIVA
+              .catch(err => {
+                alert('favor completar los campos')     
+              })  
+         },
+
+           //  RELLENAR MODAL DE DATOS AL DAR CLICK EN EDITAR
+          async AbrirModalEdit(data)
+          {
+              this.productoEdit.nombre=data.nombre,
+              this.productoEdit.categoria_id=data.categoria_id,
+              this.productoEdit.descripcion=data.descripcion,
+              this.idProducto=data.id       
+          },
+           
+          async modificarProducto()
+          {
+             const res=await axios.put('producto/'+this.idProducto,this.productoEdit)
+
+               .then(response => {
+                 console.log(res);
+                  this.listar();
+              })
+               // RESPUESTA NEGATIVA
+              .catch(err => {
+                alert('favor completar los campos')     
+              }) 
+
+          }
         
        
     },
@@ -73,6 +218,7 @@
     // paa que se se inicie la funcion listar
     created(){
         this.listar();
+        this.categoriasListar();
     },
     }
 </script>

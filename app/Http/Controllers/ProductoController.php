@@ -2,83 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Producto;
-use App\Http\Requests\StoreProductoRequest;
-use App\Http\Requests\UpdateProductoRequest;
+use App\Models\ProductoProveedor;
+use App\Models\Proveedor;
+use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return Producto::all();
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    }
+    
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProductoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store( $request)
+    
+    public function store(Request $request)
+    {
+       $Cotizacion=new Producto();
+        $Cotizacion->nombre=$request->nombre;
+        $Cotizacion->descripcion=$request->descripcion;
+        $Cotizacion->categoria_id=$request->categoria_id;
+        $Cotizacion->save();
+       
+        return response(true);
+    }
+
+    
+    public function show($id)
+    {
+        $infoProducto=Producto::findOrFail($id);
+        $proveedores=Proveedor::all();
+        $preciosProveedores=ProductoProveedor::where('producto_id',$id)->get()->load('proveedor');
+        // ENVIANDO DATOS DE LA REALCION 
+        $categoriaProducto=$infoProducto->categoria;
+        return view('pages.productoShow',compact('infoProducto','proveedores','categoriaProducto','preciosProveedores'));
+    }
+
+   
+    public function edit($id)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Producto $producto)
+    
+    public function update(Request $request, $id)
     {
-        //
+        $Cotizacion=Producto::findOrFail($id);
+        $Cotizacion->nombre=$request->nombre;
+        $Cotizacion->descripcion=$request->descripcion;
+        $Cotizacion->categoria_id=$request->categoria_id;
+        $Cotizacion->save();
+       
+        return response(true);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Producto $producto)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProductoRequest  $request
-     * @param  \App\Models\Producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function update( $request, Producto $producto)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Producto  $producto
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         Producto::findOrFail($id)->delete();
