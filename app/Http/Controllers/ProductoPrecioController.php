@@ -59,13 +59,22 @@ class ProductoPrecioController extends Controller
         return response(true);
     }
 
-    public function imgStore(Request $request,$id)
-    {
-           $imagenes=$request->img->store('public/imagenes/productos');
-           $url=Storage::url($imagenes);
-        //   $producto=Producto::findOrFail($id);
-        //   $producto->img=$url;
-        //   $producto->save();
-          return $url;
-    }
-}
+    public function imgStore(Request $request)
+     {
+        //   if ($request->hasFile(key: 'img')) {
+
+     }
+            
+     
+    //        $imagenes=$request->img->store('public/imagenes/productos');
+    //        $url=Storage::url($imagenes);
+           
+        //    $producto=Producto::findOrFail($request->id);
+        //    $producto->img=$request->image;
+        //    $producto->save();
+        //    $producto->img=$request->image;
+        //    $producto->save();
+        // $file=$request->file('image')->store('images','public');
+        //    return $request;
+ }
+

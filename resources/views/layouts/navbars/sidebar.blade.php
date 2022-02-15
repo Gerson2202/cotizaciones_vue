@@ -25,19 +25,19 @@
       </li>
       <li class="nav-item{{ $activePage == 'productos' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('productos') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">wifi</i>
             <p>{{ __('Productos') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'clientes' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('clientes') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">groups</i>
             <p>{{ __('Clientes') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('proveedores') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">support_agent</i>
             <p>{{ __('Proveedores') }}</p>
         </a>
       </li>

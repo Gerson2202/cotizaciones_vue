@@ -80,6 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.clientes');
 	})->name('clientes');
 
+
+
 	Route::middleware(['auth:sanctum','verified'])->get('clientes/list', [ClienteController::class,'index'])->name('clientesList');
 	Route::middleware(['auth:sanctum','verified'])->delete('clientes/{id}', [ClienteController::class,'destroy'])->name('clientesDelet');
 	Route::middleware(['auth:sanctum','verified'])->post('cliente/store', [ClienteController::class,'store'])->name('clienteStore');
@@ -87,18 +89,18 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::middleware(['auth:sanctum','verified'])->get('productos/list', [ProductoController::class,'index'])->name('productosList');
-	Route::middleware(['auth:sanctum','verified'])->delete('productos/{id}', [ProductoController::class,'destroy'])->name('productosDelet');
+	Route::middleware(['auth:sanctum','verified'])->get('productos/{id}', [ProductoController::class,'destroy'])->name('productosDelet');
 	Route::middleware(['auth:sanctum','verified'])->post('producto/store', [ProductoController::class,'store'])->name('productoStore');
-	Route::middleware(['auth:sanctum','verified'])->put('producto/{id}', [ProductoController::class,'update'])->name('productoUpdate');
+	Route::middleware(['auth:sanctum','verified'])->put('/producto/{id}', [ProductoController::class,'update'])->name('productoUpdate');
 	Route::middleware(['auth:sanctum','verified'])->get('producto/show/{id}', [ProductoController::class,'show'])->name('productoShow');
 	// AGG PRECIO DE PRODCUTO CON SU PROVEEDOR
 	Route::middleware(['auth:sanctum','verified'])->post('/store', [ProductoPrecioController::class,'store'])->name('productoAgg');
 	Route::middleware(['auth:sanctum','verified'])->delete('/delet/precio/{id}', [ProductoPrecioController::class,'destroy'])->name('precioDelect');
 	Route::middleware(['auth:sanctum','verified'])->get('/list/precio/{id}', [ProductoPrecioController::class,'index'])->name('preciosList');
-	Route::middleware(['auth:sanctum','verified'])->put('/imagen/store/{id}', [ProductoPrecioController::class,'imgStore'])->name('imgStore');
+	Route::middleware(['auth:sanctum','verified'])->put('/imagen/store', [ProductoPrecioController::class,'imgStore'])->name('imgStore');
 
 
-	Route::middleware(['auth:sanctum','verified'])->get('categorias/list', [CategoriaController::class,'index'])->name('categoriasList');
+	Route::middleware(['auth:sanctum','verified'])->get('/categorias/list', [CategoriaController::class,'index'])->name('categoriasList');
 	Route::middleware(['auth:sanctum','verified'])->delete('categorias/{id}', [CategoriaController::class,'destroy'])->name('categoriasDelet');
 	Route::middleware(['auth:sanctum','verified'])->post('categoria/store', [CategoriaController::class,'store'])->name('categoriaStore');
 	Route::middleware(['auth:sanctum','verified'])->put('categoria/{id}', [CategoriaController::class,'update'])->name('categoriaUpdate');

@@ -25,6 +25,9 @@
     },
     "dependencies": {
         "@ttskch/select2-bootstrap4-theme": "^1.5.2",
+        "datatables.net-bs4": "^1.11.4",
+        "jszip": "^3.7.1",
+        "pdfmake": "^0.2.4",
         "select2": "^4.1.0-rc.0"
     }
 }

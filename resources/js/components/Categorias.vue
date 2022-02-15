@@ -128,6 +128,7 @@
          {
              const res=await axios.delete('categorias/'+id);
              this.listar();
+             this.notificacioError();
          },  
 
           //  GUARDAR PRODUCTO
@@ -137,6 +138,7 @@
             .then(response => {
                   this.categoria.nombre="",
                   this.listar();
+                  this.notificacionExitosa();
               })
                // RESPUESTA NEGATIVA
               .catch(err => {
@@ -153,7 +155,7 @@
              const res=await axios.put('categoria/'+this.idCategoria,this.Editcategoria)
 
                .then(response => {
-                 console.log(res);
+                 this.notificacionExitosa();
                   this.listar();
               })
                // RESPUESTA NEGATIVA
@@ -161,7 +163,39 @@
                 alert('favor completar los campos')
               })
 
-         }
+         },
+           // Notificacion exitosa
+          async notificacionExitosa(from, align){
+
+            $.notify({
+                icon: "add_alert",
+                message: "Datos Guardados con exito"
+
+            },{
+                type: 'success',
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+          },
+            // Notificacion de eliminacion
+          async notificacioError(from, align){
+
+            $.notify({
+                icon: "add_alert",
+                message: "Se elemino correctamente"
+
+            },{
+                type: 'danger',
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+          },
         
         
        

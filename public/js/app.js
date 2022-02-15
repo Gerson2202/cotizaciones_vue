@@ -5436,7 +5436,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.listar();
 
-              case 4:
+                _this2.notificacioError();
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -5458,6 +5460,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.post('categoria/store', _this3.categoria) // RESPUESTA POSITIVA
                 .then(function (response) {
                   _this3.categoria.nombre = "", _this3.listar();
+
+                  _this3.notificacionExitosa();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
@@ -5503,7 +5507,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context5.next = 2;
                 return axios.put('categoria/' + _this5.idCategoria, _this5.Editcategoria).then(function (response) {
-                  console.log(res);
+                  _this5.notificacionExitosa();
 
                   _this5.listar();
                 }) // RESPUESTA NEGATIVA
@@ -5520,6 +5524,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee5);
+      }))();
+    },
+    // Notificacion exitosa
+    notificacionExitosa: function notificacionExitosa(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Datos Guardados con exito"
+                }, {
+                  type: 'success',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    // Notificacion de eliminacion
+    notificacioError: function notificacioError(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Se elemino correctamente"
+                }, {
+                  type: 'danger',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
       }))();
     }
   },
@@ -5730,7 +5788,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.listar();
 
-              case 4:
+                _this2.notificacioError();
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -5751,6 +5811,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.post('cliente/store', _this3.cliente) // RESPUESTA POSITIVA
                 .then(function (response) {
                   _this3.cliente.nombre = "", _this3.cliente.descripcion = "", _this3.cliente.tiempo_camioneta = "", _this3.listar();
+
+                  _this3.notificacionExitosa();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
@@ -5797,6 +5859,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context5.next = 2;
                 return axios.put('cliente/' + _this5.idCliente, _this5.clienteEdit).then(function (response) {
                   _this5.listar();
+
+                  _this5.notificacionExitosa();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
@@ -5811,6 +5875,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee5);
+      }))();
+    },
+    // Notificacion exitosa
+    notificacionExitosa: function notificacionExitosa(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Datos Guardados con exito"
+                }, {
+                  type: 'success',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    // Notificacion de eliminacion
+    notificacioError: function notificacioError(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Se elemino correctamente"
+                }, {
+                  type: 'danger',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
       }))();
     }
   },
@@ -6081,7 +6199,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 //  PARA QUE SE RECARGUE LA TABLA          
                 _this2.listar();
 
-              case 4:
+                _this2.notificacioError();
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -6128,6 +6248,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return axios.post('cotizacion/store', _this4.cotizacion) // RESPUESTA POSITIVA
                 .then(function (response) {
                   _this4.cotizacion.nombre = "", _this4.cotizacion.codigo = "", _this4.cotizacion.cliente_id = "", _this4.cotizacion.estado = "", _this4.cotizacion.descripcion = "", _this4.listar();
+
+                  _this4.notificacionExitosa();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
@@ -6175,6 +6297,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context6.next = 2;
                 return axios.put('cotizacion/' + _this6.idCotizacion, _this6.cotizacionEdit).then(function (response) {
                   _this6.listar();
+
+                  _this6.notificacionExitosa();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
@@ -6189,6 +6313,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
           }
         }, _callee6);
+      }))();
+    },
+    // Notificacion exitosa
+    notificacionExitosa: function notificacionExitosa(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Datos Guardados con exito"
+                }, {
+                  type: 'success',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    // Notificacion de eliminacion
+    notificacioError: function notificacioError(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Se elemino correctamente"
+                }, {
+                  type: 'danger',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     }
   },
@@ -6403,6 +6581,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["proveedores", "producto", "productocat", "precios"],
   mounted: function mounted() {
@@ -6412,15 +6630,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       idproducto: this.producto.id,
       idRegistroprecio: 0,
+      img: '',
+      categorias: [],
       precioso: [],
       imgProducto: {
-        img: '',
+        image: null,
         id: this.producto.id
       },
       prodcutoPrecio: {
         producto_id: this.producto.id,
         proveedor_id: '',
         precio: ''
+      },
+      productoEdit: {
+        nombre: '',
+        categoria_id: '',
+        descripcion: ''
       }
     };
   },
@@ -6441,6 +6666,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.prodcutoPrecio.proveedor_id = "", _this.prodcutoPrecio.precio = "";
 
                   _this.listarPrecios();
+
+                  _this.notificacionExitosa();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
@@ -6471,7 +6698,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 .then(function (response) {
                   alert('eliminado con exito');
 
-                  _this2.listarPrecios(); //  
+                  _this2.listarPrecios();
+
+                  _this2.notificacioError(); //  
 
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
@@ -6517,13 +6746,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var file;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                file = e.target.files[0];
-                _this4.imgProducto.img = file;
+                _this4.imgProducto.image = e.target.files[0];
+                console.log(_this4.imgProducto.image);
 
               case 2:
               case "end":
@@ -6537,19 +6765,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var res;
+        var fields, key, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _context5.next = 2;
-                return axios.put('/imagen/store/' + _this5.producto.id, _this5.imgProducto);
+                fields = new FormData();
 
-              case 2:
+                for (key in _this5.imgProducto) {
+                  fields.append(key, _this5.imgProducto[key]);
+                } // const formData=new FormData
+                // const imagen=formData.append('image',this.imgProducto.image);
+                // formData.set('image',this.image)
+
+
+                _context5.next = 4;
+                return axios.put('/imagen/store', fields);
+
+              case 4:
                 res = _context5.sent;
                 console.log(res);
 
-              case 4:
+              case 6:
               case "end":
                 return _context5.stop();
             }
@@ -6570,11 +6807,136 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee6);
       }))();
+    },
+    AbrirModalEdit: function AbrirModalEdit() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _this6.productoEdit.nombre = _this6.producto.nombre, _this6.productoEdit.categoria_id = _this6.producto.categoria_id, _this6.productoEdit.descripcion = _this6.producto.descripcion, _this6.idProducto = _this6.producto.id;
+
+              case 1:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    //  CONSULTANDO CATEGORIAS PARA EL SELECT
+    categoriasListar: function categoriasListar() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.next = 2;
+                return axios.get('/categorias/list');
+
+              case 2:
+                res = _context8.sent;
+                _this7.categorias = res.data;
+
+              case 4:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
+      }))();
+    },
+    modificarProducto: function modificarProducto() {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.next = 2;
+                return axios.put('/producto/' + _this8.idProducto, _this8.productoEdit).then(function (response) {
+                  location.reload();
+                }) // RESPUESTA NEGATIVA
+                ["catch"](function (err) {
+                  alert('favor completar los campos');
+                });
+
+              case 2:
+                res = _context9.sent;
+
+              case 3:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9);
+      }))();
+    },
+    // Notificacion exitosa
+    notificacionExitosa: function notificacionExitosa(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Datos Guardados con exito"
+                }, {
+                  type: 'success',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10);
+      }))();
+    },
+    // Notificacion de eliminacion
+    notificacioError: function notificacioError(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Se elemino correctamente"
+                }, {
+                  type: 'danger',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11);
+      }))();
     }
   },
   // paa que se se inicie la funcion listar
   created: function created() {
-    this.listarPrecios();
+    this.listarPrecios(), this.categoriasListar();
   }
 });
 
@@ -6721,7 +7083,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -6744,24 +7105,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    //  LISTAR PRODUCTOS
-    listar: function listar() {
-      var _this = this;
-
+    // LISTAR PRODUCTOS con datable
+    // PARA EL BOTON ELINMAR 
+    atento: function atento() {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var res;
+        var fila;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios.get('productos/list');
+                $(document).on("click", ".btnEliminar", function () {
+                  fila = $(this).closest("tr");
+                  var id = parseInt(fila.find('td:eq(0)').text()); //tomamos el id
 
-              case 2:
-                res = _context.sent;
-                _this.productos = res.data;
+                  $.ajax({
+                    url: "productos/" + id,
+                    type: "get",
+                    processData: false,
+                    //tell jQuery not to process the data
+                    contentType: false,
+                    //tell jQuery not to set contentType
+                    success: function success() {
+                      alert('se elimino ocon exito');
+                      location.reload();
+                    }
+                  });
+                });
 
-              case 4:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -6769,24 +7140,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    eliminar: function eliminar(id) {
-      var _this2 = this;
-
+    // PARA EL BOTON VER
+    atento2: function atento2() {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var res;
+        var fila1;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return axios["delete"]('productos/' + id);
+                $(document).on("click", ".btnVer", function () {
+                  fila1 = $(this).closest("tr");
+                  var id1 = parseInt(fila1.find('td:eq(0)').text()); //tomamos el id
+                  // FALTA DIRECCIONARLO ALA PAGINA
 
-              case 2:
-                res = _context2.sent;
+                  var src = "/producto/show/" + id1;
+                  var btn = $('.btnVer').attr("href", src);
+                });
 
-                _this2.listar();
-
-              case 4:
+              case 1:
               case "end":
                 return _context2.stop();
             }
@@ -6794,9 +7165,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    //  CONSULTANDO CATEGORIAS PARA EL SELECT
-    categoriasListar: function categoriasListar() {
-      var _this3 = this;
+    listar: function listar() {
+      var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var res;
@@ -6805,13 +7175,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.get('categorias/list');
+                return axios.get('productos/list');
 
               case 2:
                 res = _context3.sent;
-                _this3.categorias = res.data;
+                _this.productos = res.data;
+                $('#tablaProductos').DataTable({
+                  data: res.data,
+                  columns: [{
+                    data: 'id'
+                  }, {
+                    data: 'nombre'
+                  }, {
+                    data: 'descripcion'
+                  }, {
+                    defaultContent: '<button @click="eliminar(prod.id)" class="btn btn-danger btn-sm btnEliminar">Eliminar</button><span></span> <a class="btn btn-sm btn-info btnVer" href="#">Ver detalles</a></td>'
+                  }]
+                });
 
-              case 4:
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -6819,9 +7201,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    //  GUARDAR PRODUCTO 
-    guardarProducto: function guardarProducto() {
-      var _this4 = this;
+    //LISTAR PRODUCTOS sin datable
+    //  async listar()
+    //  {
+    //      const res=await axios.get('productos/list');
+    //       this.productos=res.data;            
+    //  },   
+    // async eliminar(data)
+    // {
+    //   const res=await axios.delete('productos/'+data);
+    //   this.listar();
+    // },
+    //  CONSULTANDO CATEGORIAS PARA EL SELECT
+    categoriasListar: function categoriasListar() {
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         var res;
@@ -6830,18 +7223,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.next = 2;
-                return axios.post('producto/store', _this4.producto) // RESPUESTA POSITIVA
-                .then(function (response) {
-                  _this4.producto.nombre = "", _this4.producto.categoria_id = "", _this4.producto.descripcion = "", _this4.listar();
-                }) // RESPUESTA NEGATIVA
-                ["catch"](function (err) {
-                  alert('favor completar los campos');
-                });
+                return axios.get('categorias/list');
 
               case 2:
                 res = _context4.sent;
+                _this2.categorias = res.data;
 
-              case 3:
+              case 4:
               case "end":
                 return _context4.stop();
             }
@@ -6849,18 +7237,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4);
       }))();
     },
-    //  RELLENAR MODAL DE DATOS AL DAR CLICK EN EDITAR
-    AbrirModalEdit: function AbrirModalEdit(data) {
-      var _this5 = this;
+    //  GUARDAR PRODUCTO 
+    guardarProducto: function guardarProducto() {
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _this5.productoEdit.nombre = data.nombre, _this5.productoEdit.categoria_id = data.categoria_id, _this5.productoEdit.descripcion = data.descripcion, _this5.idProducto = data.id;
+                _context5.next = 2;
+                return axios.post('producto/store', _this3.producto) // RESPUESTA POSITIVA
+                .then(function (response) {
+                  _this3.producto.nombre = "", _this3.producto.categoria_id = "", _this3.producto.descripcion = "", location.reload(); // this.listar();
+                }) // RESPUESTA NEGATIVA
+                ["catch"](function (err) {
+                  alert('favor completar los campos');
+                });
 
-              case 1:
+              case 2:
+                res = _context5.sent;
+
+              case 3:
               case "end":
                 return _context5.stop();
             }
@@ -6868,34 +7267,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee5);
       }))();
     },
-    modificarProducto: function modificarProducto() {
-      var _this6 = this;
+    //  RELLENAR MODAL DE DATOS AL DAR CLICK EN EDITAR
+    AbrirModalEdit: function AbrirModalEdit(data) {
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                _context6.next = 2;
-                return axios.put('producto/' + _this6.idProducto, _this6.productoEdit).then(function (response) {
+                alert('hols');
+                _this4.productoEdit.nombre = data.nombre, _this4.productoEdit.categoria_id = data.categoria_id, _this4.productoEdit.descripcion = data.descripcion, _this4.idProducto = data.id;
+
+              case 2:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    modificarProducto: function modificarProducto() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.next = 2;
+                return axios.put('producto/' + _this5.idProducto, _this5.productoEdit).then(function (response) {
                   console.log(res);
 
-                  _this6.listar();
+                  _this5.listar();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
                 });
 
               case 2:
-                res = _context6.sent;
+                res = _context7.sent;
 
               case 3:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6);
+        }, _callee7);
       }))();
     }
   },
@@ -6903,6 +7322,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     this.listar();
     this.categoriasListar();
+    this.atento();
+    this.atento2();
   }
 });
 
@@ -7122,7 +7543,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.listar();
 
-              case 4:
+                _this2.notificacioError();
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -7143,6 +7566,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.post('proveedor/store', _this3.proveedor) // RESPUESTA POSITIVA
                 .then(function (response) {
                   _this3.proveedor.nombre = "", _this3.proveedor.descripcion = "", _this3.proveedor.direccion = "", _this3.proveedor.tiempo_envio = "", _this3.listar();
+
+                  _this3.notificacionExitosa();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
@@ -7189,6 +7614,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context5.next = 2;
                 return axios.put('proveedor/' + _this5.idProveedor, _this5.proveedorEdit).then(function (response) {
                   _this5.listar();
+
+                  _this5.notificacionExitosa();
                 }) // RESPUESTA NEGATIVA
                 ["catch"](function (err) {
                   alert('favor completar los campos');
@@ -7203,6 +7630,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee5);
+      }))();
+    },
+    // Notificacion exitosa
+    notificacionExitosa: function notificacionExitosa(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Datos Guardados con exito"
+                }, {
+                  type: 'success',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    // Notificacion de eliminacion
+    notificacioError: function notificacioError(from, align) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                $.notify({
+                  icon: "add_alert",
+                  message: "Se elemino correctamente"
+                }, {
+                  type: 'danger',
+                  timer: 1000,
+                  placement: {
+                    from: from,
+                    align: align
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
       }))();
     }
   },
@@ -32813,22 +33294,256 @@ var render = function () {
                       _c("tr", [
                         _vm._m(1),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.producto.nombre))]),
+                        _c("td", { attrs: { id: "productoNombre" } }, [
+                          _vm._v(_vm._s(_vm.producto.nombre)),
+                        ]),
                       ]),
                       _vm._v(" "),
                       _c("tr", [
                         _vm._m(2),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.producto.descripcion))]),
+                        _c("td", { attrs: { id: "productoDescripcion" } }, [
+                          _vm._v(_vm._s(_vm.producto.descripcion)),
+                        ]),
                       ]),
                       _vm._v(" "),
                       _c("tr", [
                         _vm._m(3),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.productocat.nombre))]),
+                        _c("td", { attrs: { id: "productiCategoria" } }, [
+                          _vm._v(_vm._s(_vm.productocat.nombre)),
+                        ]),
                       ]),
                     ]),
                   ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-lg btn-sm col-12",
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "#exampleModal2",
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.AbrirModalEdit()
+                        },
+                      },
+                    },
+                    [_vm._v("Editar Informacion")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal fade",
+                      attrs: {
+                        id: "exampleModal2",
+                        tabindex: "-1",
+                        role: "dialog",
+                        "aria-labelledby": "exampleModalLabel",
+                        "aria-hidden": "true",
+                      },
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "modal-dialog",
+                          attrs: { role: "document" },
+                        },
+                        [
+                          _c("div", { staticClass: "modal-content" }, [
+                            _vm._m(4),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-body" }, [
+                              _c("form", { attrs: { action: "" } }, [
+                                _c("div", { staticClass: "my-4" }, [
+                                  _c("label", { attrs: { for: "nombre" } }, [
+                                    _vm._v("Nombre"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.productoEdit.nombre,
+                                        expression: "productoEdit.nombre",
+                                      },
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      id: "nombre",
+                                      name: "nombre",
+                                      placeholder: "escribir Nombre",
+                                    },
+                                    domProps: {
+                                      value: _vm.productoEdit.nombre,
+                                    },
+                                    on: {
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.productoEdit,
+                                          "nombre",
+                                          $event.target.value
+                                        )
+                                      },
+                                    },
+                                  }),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "my-4" }, [
+                                  _c("label", { attrs: { for: "cliente" } }, [
+                                    _vm._v("Categoria"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.productoEdit.categoria_id,
+                                          expression:
+                                            "productoEdit.categoria_id",
+                                        },
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        options: _vm.categorias,
+                                        name: "categoria_id",
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          var $$selectedVal =
+                                            Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function (o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function (o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                          _vm.$set(
+                                            _vm.productoEdit,
+                                            "categoria_id",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "0" } },
+                                        [_vm._v("Seleccionar uno...")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.categorias, function (cate) {
+                                        return _c(
+                                          "option",
+                                          { domProps: { value: cate.id } },
+                                          [_vm._v(" " + _vm._s(cate.nombre))]
+                                        )
+                                      }),
+                                    ],
+                                    2
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "my-4" }, [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "descripcion" } },
+                                    [_vm._v("Descripcion")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("textarea", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.productoEdit.descripcion,
+                                        expression: "productoEdit.descripcion",
+                                      },
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      id: "descripcion",
+                                      name: "descripcion",
+                                      placeholder: "escribir descripcion",
+                                    },
+                                    domProps: {
+                                      value: _vm.productoEdit.descripcion,
+                                    },
+                                    on: {
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.productoEdit,
+                                          "descripcion",
+                                          $event.target.value
+                                        )
+                                      },
+                                    },
+                                  }),
+                                ]),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-footer" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-secondary",
+                                  attrs: {
+                                    type: "button",
+                                    "data-dismiss": "modal",
+                                  },
+                                },
+                                [_vm._v("Close")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary",
+                                  attrs: {
+                                    type: "submit",
+                                    "data-dismiss": "modal",
+                                  },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.modificarProducto()
+                                    },
+                                  },
+                                },
+                                [_vm._v("Agregar Cotizacion")]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
                 ]
               ),
               _vm._v(" "),
@@ -32836,95 +33551,62 @@ var render = function () {
                 "div",
                 { staticClass: "tab-pane", attrs: { id: "messages" } },
                 [
-                  _c(
-                    "form",
-                    { attrs: { action: "", enctype: "multipart/form-data" } },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "fileinput fileinput-new text-center",
-                          attrs: { "data-provides": "fileinput" },
-                        },
-                        [
-                          _vm._m(4),
+                  _c("form", { attrs: { enctype: "multipart/formdata" } }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "fileinput fileinput-new text-center",
+                        attrs: { "data-provides": "fileinput" },
+                      },
+                      [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass:
+                            "fileinput-preview fileinput-exists thumbnail img-raised",
+                        }),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "btn btn-raised btn-round btn-default btn-file",
+                            },
+                            [
+                              _c("span", { staticClass: "fileinput-new" }, [
+                                _vm._v("Seleccionar"),
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "fileinput-exists" }),
+                              _vm._v(" "),
+                              _c("input", {
+                                attrs: { type: "file", name: "file" },
+                                on: { change: _vm.obtenerImagen },
+                              }),
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("div", {
-                            staticClass:
-                              "fileinput-preview fileinput-exists thumbnail img-raised",
-                          }),
+                          _vm._m(6),
                           _vm._v(" "),
-                          _c("div", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.imgProducto.id,
-                                  expression: "imgProducto.id",
-                                },
-                              ],
-                              attrs: {
-                                placeholder: "hl",
-                                name: "id",
-                                type: "hidden",
-                              },
-                              domProps: { value: _vm.imgProducto.id },
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-success btn-round fileinput-exists",
+                              attrs: { type: "button" },
                               on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.imgProducto,
-                                    "id",
-                                    $event.target.value
-                                  )
+                                click: function ($event) {
+                                  return _vm.guardarImagen()
                                 },
                               },
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "btn btn-raised btn-round btn-default btn-file",
-                              },
-                              [
-                                _c("span", { staticClass: "fileinput-new" }, [
-                                  _vm._v("Seleccionar"),
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "fileinput-exists" }),
-                                _vm._v(" "),
-                                _c("input", {
-                                  attrs: { type: "file", name: "img" },
-                                  on: { change: _vm.obtenerImagen },
-                                }),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _vm._m(5),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn btn-success btn-round fileinput-exists",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.guardarImagen()
-                                  },
-                                },
-                              },
-                              [_vm._v("Guardar")]
-                            ),
-                          ]),
-                        ]
-                      ),
-                    ]
-                  ),
+                            },
+                            [_vm._v("Guardar")]
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ]),
                 ]
               ),
               _vm._v(" "),
@@ -32936,7 +33618,7 @@ var render = function () {
                     _c(
                       "tbody",
                       [
-                        _vm._m(6),
+                        _vm._m(7),
                         _vm._v(" "),
                         _vm._l(_vm.precioso, function (precio) {
                           return _c("tr", [
@@ -32987,7 +33669,7 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-6 col-md-12" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(7),
+          _vm._m(8),
           _vm._v(" "),
           _c("div", { staticClass: "card-body table-responsive" }, [
             _c("form", [
@@ -33233,6 +33915,31 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", { staticClass: "text-primary" }, [
       _c("strong", [_vm._v("Categoria")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Editar Producto")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close",
+          },
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
     ])
   },
   function () {
@@ -33693,69 +34400,7 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "table-responsive" }, [
-        _c("table", { staticClass: "table" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.productos, function (prod) {
-              return _c("tr", { key: prod.id }, [
-                _c("th", { attrs: { scope: "row" } }, [
-                  _vm._v(_vm._s(prod.id)),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(prod.nombre))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(prod.descripcion))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-info btn-sm",
-                      attrs: {
-                        "data-toggle": "modal",
-                        "data-target": "#exampleModal2",
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.AbrirModalEdit(prod)
-                        },
-                      },
-                    },
-                    [_vm._v("Editar")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger btn-sm",
-                      on: {
-                        click: function ($event) {
-                          return _vm.eliminar(prod.id)
-                        },
-                      },
-                    },
-                    [_vm._v("Eliminar")]
-                  ),
-                  _c("span"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-sm btn-info",
-                      attrs: { href: "/producto/show/" + prod.id },
-                    },
-                    [_vm._v("Ver detalles")]
-                  ),
-                ]),
-              ])
-            }),
-            0
-          ),
-        ]),
-      ]),
+      _vm._m(2),
     ]),
   ])
 }
@@ -33814,29 +34459,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "text-primary" }, [
-      _c("th", [_vm._v("\n                ID\n              ")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("\n                Nombre\n              ")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("\n                Descripcion\n              ")]),
-      _vm._v(" "),
-      _c("th", { attrs: { row: "2" } }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success btn-round btn-sm",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#exampleModal",
-            },
-          },
-          [
-            _c("i", { staticClass: "material-icons" }, [_vm._v("add_box")]),
-            _vm._v("  Agregar"),
-          ]
-        ),
+    return _c("div", { staticClass: "table-responsive" }, [
+      _c("table", { staticClass: "table", attrs: { id: "tablaProductos" } }, [
+        _c("thead", { staticClass: "text-primary" }, [
+          _c("th", [_vm._v("\n                ID\n              ")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("\n                Nombre\n              ")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("\n                Descripcion\n              ")]),
+          _vm._v(" "),
+          _c("th", { attrs: { row: "2" } }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-round btn-sm",
+                attrs: {
+                  type: "button",
+                  "data-toggle": "modal",
+                  "data-target": "#exampleModal",
+                },
+              },
+              [
+                _c("i", { staticClass: "material-icons" }, [_vm._v("add_box")]),
+                _vm._v("  Agregar"),
+              ]
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("tbody"),
       ]),
     ])
   },

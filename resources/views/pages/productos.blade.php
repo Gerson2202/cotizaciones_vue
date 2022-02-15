@@ -5,7 +5,7 @@
     <div id="app">
         <div class="container-fluid">
             <div class="row">
-              <div class="col-md-6" >
+              <div class="col-md-12" >
                 <div class="card">
                   <div class="card-header card-header-primary">
                     <h4 class="card-title ">Productos</h4>
@@ -17,7 +17,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6" >
+              <div class="col-md-12" >
                 <div class="card">
                   <div class="card-header card-header-primary">
                     <h4 class="card-title ">Categorias</h4>

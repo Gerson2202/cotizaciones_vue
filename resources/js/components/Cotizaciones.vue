@@ -219,6 +219,7 @@
            const res=await axios.delete('cotizaciones/'+id); 
             //  PARA QUE SE RECARGUE LA TABLA          
             this.listar();
+            this.notificacioError();
          }, 
 
         //  CONSULTANDO CLIENTES PARA EL SELECT
@@ -241,6 +242,7 @@
                   this.cotizacion.estado="",
                   this.cotizacion.descripcion="",
                   this.listar();
+                  this.notificacionExitosa();
               })
                // RESPUESTA NEGATIVA
               .catch(err => {
@@ -267,12 +269,45 @@
 
                .then(response => {
                   this.listar();
+                   this.notificacionExitosa();
               })
                // RESPUESTA NEGATIVA
               .catch(err => {
                 alert('favor completar los campos')     
               })  
              
+          },
+             // Notificacion exitosa
+          async notificacionExitosa(from, align){
+
+            $.notify({
+                icon: "add_alert",
+                message: "Datos Guardados con exito"
+
+            },{
+                type: 'success',
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+          },
+            // Notificacion de eliminacion
+          async notificacioError(from, align){
+
+            $.notify({
+                icon: "add_alert",
+                message: "Se elemino correctamente"
+
+            },{
+                type: 'danger',
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
           },
     },      
     

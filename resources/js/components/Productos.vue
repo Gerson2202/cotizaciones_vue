@@ -23,9 +23,8 @@
                             <div class="my-4">
                                 <label for="cliente">Categoria</label>
                                   <select v-model="producto.categoria_id" :options="categorias" name="categoria_id" class="form-control">
-                                   <option disabled value="0">Seleccionar uno...</option>
-                                    <option v-for="cate in categorias" :value="cate.id"> {{cate.nombre}}</option>                                  
-                                   
+                                    <option disabled value="0">Seleccionar uno...</option>
+                                    <option v-for="cate in categorias" :value="cate.id"> {{cate.nombre}}</option> 
                                 </select>
                            </div> 
                           
@@ -86,7 +85,7 @@
           </div>
 
            <div class="table-responsive">
-              <table class="table">
+              <table class="table" id="tablaProductos">
                 <thead class="text-primary">
                   <th>
                     ID
@@ -105,14 +104,14 @@
                  
                 </thead>
                 <tbody>
-                   <tr v-for="prod in productos" :key="prod.id">
+                   <!-- <tr v-for="prod in productos" :key="prod.id">
                         <th scope="row">{{prod.id}}</th>
                         <td>{{prod.nombre}}</td>
                         <td>{{prod.descripcion}}</td>
                         <td><button data-toggle="modal" data-target="#exampleModal2" @click="AbrirModalEdit(prod)" class="btn btn-info btn-sm">Editar</button>
                         <button @click="eliminar(prod.id)" class="btn btn-danger btn-sm">Eliminar</button><span></span>
-                        <a class="btn btn-sm btn-info" :href="`/producto/show/${prod.id}`">Ver detalles</a></td>
-                    </tr>                    
+                        <a class="btn btn-sm btn-info" :href="`/produ cto/show/${prod.id}`">Ver detalles</a></td>
+                    </tr>                    -->
                  
                 </tbody>
               </table>
@@ -152,18 +151,76 @@
         
     },
      methods:{
-
-      //  LISTAR PRODUCTOS
-         async listar()
+      
+          // LISTAR PRODUCTOS con datable
+          // PARA EL BOTON ELINMAR 
+          async atento()
+          {
+            
+             let fila;
+             $(document).on("click",".btnEliminar",function(){
+                fila= $(this).closest("tr");
+                let id= parseInt(fila.find('td:eq(0)').text()); //tomamos el id
+                 $.ajax(
+                  {
+                        url: "productos/"+id, 
+                        type: "get",
+                        processData: false,   //tell jQuery not to process the data
+                        contentType: false,//tell jQuery not to set contentType
+                        
+                        success: function()
+                        {
+                          
+                            alert('se elimino ocon exito')
+                            location.reload();
+                        }
+            
+                      })  
+                
+             });            
+              
+          },
+          // PARA EL BOTON VER
+          async atento2()
+          {
+            
+             let fila1;
+             $(document).on("click",".btnVer",function(){
+                fila1= $(this).closest("tr");
+                let id1= parseInt(fila1.find('td:eq(0)').text()); //tomamos el id
+                // FALTA DIRECCIONARLO ALA PAGINA
+                let src = "/producto/show/"+id1;
+                var btn = $('.btnVer').attr("href",src); 
+             });            
+              
+          },
+         
+         async listar() 
          {
              const res=await axios.get('productos/list');
              this.productos=res.data;
-         },  
-         async eliminar(id)
-         {
-           const res=await axios.delete('productos/'+id);
-           this.listar();
-         },
+              $('#tablaProductos').DataTable( {
+                 data: res.data,
+                    columns: [
+                        { data: 'id' },
+                        { data: 'nombre' },
+                        { data: 'descripcion' },
+                        {defaultContent:  '<button @click="eliminar(prod.id)" class="btn btn-danger btn-sm btnEliminar">Eliminar</button><span></span> <a class="btn btn-sm btn-info btnVer" href="#">Ver detalles</a></td>'}                 
+                    ]
+             } );
+          },  
+          //LISTAR PRODUCTOS sin datable
+        //  async listar()
+        //  {
+        //      const res=await axios.get('productos/list');
+        //       this.productos=res.data;            
+        //  },   
+         
+          // async eliminar(data)
+          // {
+          //   const res=await axios.delete('productos/'+data);
+          //   this.listar();
+          // },
 
          //  CONSULTANDO CATEGORIAS PARA EL SELECT
           async categoriasListar()  
@@ -180,7 +237,8 @@
                   this.producto.nombre="",
                   this.producto.categoria_id="",
                   this.producto.descripcion="",
-                  this.listar();
+                  location.reload();
+                  // this.listar();
               })
                // RESPUESTA NEGATIVA
               .catch(err => {
@@ -191,6 +249,7 @@
            //  RELLENAR MODAL DE DATOS AL DAR CLICK EN EDITAR
           async AbrirModalEdit(data)
           {
+              alert('hols')
               this.productoEdit.nombre=data.nombre,
               this.productoEdit.categoria_id=data.categoria_id,
               this.productoEdit.descripcion=data.descripcion,
@@ -210,7 +269,10 @@
                 alert('favor completar los campos')     
               }) 
 
-          }
+          },
+           
+           
+
         
        
     },
@@ -219,6 +281,8 @@
     created(){
         this.listar();
         this.categoriasListar();
+        this.atento();
+         this.atento2();
     },
-    }
+     }
 </script>

@@ -154,6 +154,7 @@
          {
              const res=await axios.delete('clientes/'+id);
              this.listar();
+             this.notificacioError();
          },  
          async guardarCliente()
          {
@@ -163,7 +164,8 @@
                   this.cliente.nombre="",
                   this.cliente.descripcion="",
                   this.cliente.tiempo_camioneta="",
-                  this.listar();                                  
+                  this.listar();             
+                  this.notificacionExitosa()                     
               })
                // RESPUESTA NEGATIVA
               .catch(err => {
@@ -175,7 +177,8 @@
               this.clienteEdit.nombre=data.nombre,
               this.clienteEdit.descripcion=data.descripcion,
               this.clienteEdit.tiempo_camioneta=data.tiempo_camioneta,
-              this.idCliente=data.id  
+              this.idCliente=data.id
+              
           },
             async modificarCliente()
           {
@@ -183,12 +186,45 @@
 
                .then(response => {
                   this.listar();
+                  this.notificacionExitosa()
               })
                // RESPUESTA NEGATIVA
               .catch(err => {
                 alert('favor completar los campos')     
               })  
              
+          },
+          // Notificacion exitosa
+          async notificacionExitosa(from, align){
+
+            $.notify({
+                icon: "add_alert",
+                message: "Datos Guardados con exito"
+
+            },{
+                type: 'success',
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+          },
+            // Notificacion de eliminacion
+          async notificacioError(from, align){
+
+            $.notify({
+                icon: "add_alert",
+                message: "Se elemino correctamente"
+
+            },{
+                type: 'danger',
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
           },
         
         

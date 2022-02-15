@@ -34,41 +34,81 @@
                 </div>
                 <div class="card-body">
                   <div class="tab-content">
-                    <!-- INFO -->
+                    <!-- INFO PRODUCTO-->
                     <div class="tab-pane active" id="profile">
                       <table class="table">
                         <tbody>
                           <tr>
                             <td class="text-primary"><strong>Nombre</strong> </td>
-                            <td>{{producto.nombre}}</td> 
+                            <td id="productoNombre">{{producto.nombre}}</td> 
                           </tr>
                           <tr>
                             <td class="text-primary"><strong>Descripcion</strong></td>
-                            <td>{{producto.descripcion}}</td> 
+                            <td id="productoDescripcion">{{producto.descripcion}}</td> 
                           </tr>
                           <tr>
                             <td class="text-primary"><strong>Categoria</strong> </td>
-                            <td>{{productocat.nombre}}</td> 
+                            <td id="productiCategoria">{{productocat.nombre}}</td> 
                           </tr>
-                         
                         </tbody>
-                      </table>
+                       </table>
+                       <button class="btn btn-success btn-lg btn-sm col-12" data-toggle="modal" data-target="#exampleModal2" @click="AbrirModalEdit()">Editar Informacion</button>
+                        <!-- Modal PARA MODIFICAR PRODUCTO -->
+                          <div   class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content" >
+                                <div class="modal-header">
+                                  <h5 class="modal-title"  id="exampleModalLabel">Editar Producto</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form action="">
+                                          <div class="my-4">
+                                                <label for="nombre">Nombre</label>
+                                                <!-- enlazar un input con una data  -->
+                                                <input v-model="productoEdit.nombre"  type="text" class="form-control" id="nombre" name="nombre" placeholder="escribir Nombre">
+                                          </div>
+                                            <div class="my-4">
+                                                <label for="cliente">Categoria</label>
+                                                  <select v-model="productoEdit.categoria_id" :options="categorias" name="categoria_id" class="form-control">
+                                                  <option disabled value="0">Seleccionar uno...</option>
+                                                    <option v-for="cate in categorias" :value="cate.id"> {{cate.nombre}}</option>                                  
+                                                  
+                                                </select>
+                                          </div> 
+                                          
+                                            <div class="my-4">
+                                                <label for="descripcion">Descripcion</label>
+                                                <textarea v-model="productoEdit.descripcion" type="text" class="form-control" id="descripcion" name="descripcion" placeholder="escribir descripcion"></textarea>
+                                          </div>                          
+
+                                      </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button @click="modificarProducto()" type="submit" data-dismiss="modal" class="btn btn-primary">Agregar Cotizacion</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- END MODAL -->
                     </div>
                     <!-- IMAGEN -->
                    <div class="tab-pane" id="messages">
-                      <form action="" enctype="multipart/form-data">
+                      <form enctype="multipart/formdata" >
                         <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                             <div class="fileinput-new thumbnail img-raised">
                                 <img src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png" alt="...">
                             </div>
                             <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
                             <div>
-                                <input v-model="imgProducto.id" placeholder="hl" name="id" type="hidden">
-
+                               
                                 <span  class="btn btn-raised btn-round btn-default btn-file">
                                     <span class="fileinput-new">Seleccionar</span>
                                     <span class="fileinput-exists"></span>
-                                    <input @change="obtenerImagen" type="file" name="img" />
+                                    <input @change="obtenerImagen"  type="file" name="file"/>
                                 </span>
                                 <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Eliminar</a>
                                 <button type="button" @click="guardarImagen()" class="btn btn-success btn-round fileinput-exists" >Guardar</button>
@@ -158,10 +198,12 @@
           
             idproducto:this.producto.id,
             idRegistroprecio:0,
+            img:'',
+            categorias:[],
             
             precioso:[],
             imgProducto:{
-              img:'',
+              image:null,
               id:this.producto.id,
             },
 
@@ -171,7 +213,12 @@
                 proveedor_id:'',
                 precio:'',
                 
-            }     
+            },
+             productoEdit:{
+              nombre:'',
+              categoria_id:'',
+              descripcion:''
+            },
             
                      
 
@@ -190,6 +237,7 @@
                  this.prodcutoPrecio.proveedor_id="",
                  this.prodcutoPrecio.precio=""  
                  this.listarPrecios()
+                 this.notificacionExitosa();
               })
                // RESPUESTA NEGATIVA
               .catch(err => {
@@ -203,6 +251,7 @@
             .then(response => {
                alert('eliminado con exito')
                this.listarPrecios()
+               this.notificacioError();
               //  
               })
                // RESPUESTA NEGATIVA
@@ -213,26 +262,92 @@
           async listarPrecios()
          {
             const res=await axios.get('/list/precio/'+this.idproducto);
-             this.precioso=res.data
+            this.precioso=res.data
              
          },
          async obtenerImagen(e)
          {
-           let file= e.target.files[0];
+            this.imgProducto.image= e.target.files[0];          
+            console.log(this.imgProducto.image);
            
-           this.imgProducto.img=file;
          },
          async guardarImagen()
          {
-            
-             const res=await axios.put('/imagen/store/'+this.producto.id,this.imgProducto);
-             console.log(res);
+           let fields=new FormData();
+           for (let key in this.imgProducto) {
+             fields.append(key, this.imgProducto[key])
+             
+           }
+            // const formData=new FormData
+            // const imagen=formData.append('image',this.imgProducto.image);
+            // formData.set('image',this.image)
+            const res=await axios.put('/imagen/store',fields);
+            console.log(res);
          },
          //listar productos con precios
          async listar()
          {
            
-         }
+         },
+          async AbrirModalEdit()
+          {
+              this.productoEdit.nombre=this.producto.nombre,
+              this.productoEdit.categoria_id=this.producto.categoria_id,
+              this.productoEdit.descripcion=this.producto.descripcion,
+              this.idProducto=this.producto.id    
+          },
+           //  CONSULTANDO CATEGORIAS PARA EL SELECT
+          async categoriasListar()  
+         {
+           const res=await axios.get('/categorias/list'); 
+            this.categorias=res.data;
+         }, 
+          async modificarProducto()
+          {
+             const res=await axios.put('/producto/'+this.idProducto,this.productoEdit)
+
+               .then(response => {
+                  location.reload();
+              })
+               // RESPUESTA NEGATIVA
+              .catch(err => {
+                alert('favor completar los campos')     
+              }) 
+
+          },
+              // Notificacion exitosa
+          async notificacionExitosa(from, align){
+
+            $.notify({
+                icon: "add_alert",
+                message: "Datos Guardados con exito"
+
+            },{
+                type: 'success',
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+          },
+            // Notificacion de eliminacion
+          async notificacioError(from, align){
+
+            $.notify({
+                icon: "add_alert",
+                message: "Se elemino correctamente"
+
+            },{
+                type: 'danger',
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+          },
+
 
       
         
@@ -242,7 +357,8 @@
 
     // paa que se se inicie la funcion listar
     created(){
-      this.listarPrecios()
+      this.listarPrecios(),
+      this.categoriasListar()
         
     },
     }
